@@ -1,9 +1,9 @@
 DEFAULT: clean compile run
 clean:
-	rm *.o runme
-compile main.o: main.c
-	gcc -o main.o
-run: main.o
+	rm -f *.o runme
+compile runme: main.o
+	gcc -o runme main.o
+run: runme
 	./runme
-main.o:
+main.o: main.c
 	gcc -c main.c
