@@ -19,7 +19,8 @@ int err(){
 int func();
 int func(){
   pid_t p = 1;
-  for (int i = 0;i<2;i++){ //for generalization
+  //for generalization
+  for (int i = 0;i<2;i++){ //creates the children
     if (p != 0){ //if process is the parent, fork again
       p = fork();
       if (p == -1){
@@ -27,6 +28,8 @@ int func(){
       }
     }
   }
+
+
 }
 
 int main(){
