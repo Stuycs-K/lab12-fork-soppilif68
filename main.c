@@ -18,7 +18,7 @@ int err(){
 
 int * get_random(int length){
   int r_file = open("/dev/random", O_RDONLY , 0);
-  
+
   int * buff = (int *) malloc(length*sizeof(int));
   if(r_file == -1) err();
   int n;
@@ -31,8 +31,8 @@ int func(){
   pid_t p = 1;
   //for generalization
 //  printf("\ninit p: %d",p);
-  
-  
+
+
   for (int i = 0;i<2;i++){ //creates the children
     if (p != 0){ //if process is the parent, fork again
       p = fork();
@@ -48,14 +48,15 @@ int func(){
   r = abs(r);
   r = (r % 5) + 1;
   printf("\nr:%d",r);
-  
+
 //  printf("\n1");
+  sleep(r);
   return 0;
 }
 
 int main(){
   func();
-  
+
   printf("\n");
   return 0;
 }
