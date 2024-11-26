@@ -31,6 +31,8 @@ int func(){
   pid_t p = 1;
   //for generalization
 //  printf("\ninit p: %d",p);
+  pid_t parent = getpid();
+  printf("%d about to create 2 child processes.\n",parent);
 
 
   for (int i = 0;i<2;i++){ //creates the children
@@ -43,15 +45,27 @@ int func(){
     }
 //    printf("\np: %d, %d",p,getpid());
   }
+  pid_t curr = getpid();
+
   int * rp = get_random(1);
   int r = *rp;
   r = abs(r);
   r = (r % 5) + 1;
-  printf("\nr:%d",r);
+  // printf("\nr:%d",r);
 
 //  printf("\n1");
-  sleep(r);
-  return 0;
+  if (curr != parent){
+    sleep(r);
+    printf("%d finished after %d seconds\n",getpid(),r);
+    return r;
+  }
+  else{
+    pid_t child = wait(&curr);
+    int sec = WEXITSTATUS(child);
+    printf("Main Process %d is done. Child %d slept for %d sec\n",parent,child,sec);
+
+    return 0;
+  }
 }
 
 int main(){
