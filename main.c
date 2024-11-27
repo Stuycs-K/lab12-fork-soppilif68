@@ -57,11 +57,13 @@ int func(){
   if (curr != parent){
     sleep(r);
     printf("%d finished after %d seconds\n",getpid(),r);
-    return r;
+    exit(r);
   }
   else{
-    pid_t child = wait(&curr);
-    int sec = WEXITSTATUS(child);
+    int * status = &curr;
+    pid_t child = wait(status);
+    printf("status:%d\n",*status);
+    int sec = WEXITSTATUS(*status);
     printf("Main Process %d is done. Child %d slept for %d sec\n",parent,child,sec);
 
     return 0;
