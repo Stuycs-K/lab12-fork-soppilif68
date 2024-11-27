@@ -64,8 +64,7 @@ int func(){
     pid_t child = wait(status);
     printf("status:%d\n",*status);
     int sec = WEXITSTATUS(*status);
-    printf("Main Process %d is done. Child %d slept for %d sec\n",parent,child,sec);
-
+    printf("\nMain Process %d is done. Child %d slept for %d sec\n",parent,child,sec);
     return 0;
   }
 }
@@ -73,6 +72,6 @@ int func(){
 int main(){
   func();
 
-  printf("\n");
+  printf("\n\n");
   return 0;
 }
